@@ -16,7 +16,7 @@ janela = pygame.display.set_mode((largura,altura))
 pygame.display.set_caption("Sumo Eats")
 
 #Importar imagens
-sumo = pygame.image.load('sumo_parado.png')
+sumo = pygame.image.load('Assets/sumo_parado.png')
 bigorna = pygame.image.load('bigorna.png')
 onigiri = pygame.image.load('onigiri.png')
 sushi = pygame.image.load('sushi.png')
