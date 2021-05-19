@@ -6,14 +6,29 @@ import random
 pygame.init()
 
 #Definido janela
-Width=1024
-Height=769
-win = pygame.display.set_mode((Width,Height))
+largura=1024
+altura=769
+win = pygame.display.set_mode((largura,altura))
 
 #Nome do jogo
 pygame.display.set_caption("Sumo Eats")
 
 #Importar imagens
+sumo = pygame.image.load('sumo_parado.png')
+bigorna = pygame.image.load('bigorna.png')
+onigiri = pygame.image.load('onigiri.png')
+sushi = pygame.image.load('sushi.png')
+lamen = pygame.image.load('lamen.png')
+doce = pygame.image.load('Doce.png')
+
+comida_largura = 80
+comida_altura = 80
+sumo_largura = 200
+sumo_altura = 200
+bigorna_altura = 90
+bigorna_largura = 90
+
+#Importar animações
 direita = [pygame.image.load('d0.png'), pygame.image.load('d1.png'), pygame.image.load('d2.png')]
 esquerda = [pygame.image.load('e0.png'), pygame.image.load('e1.png'), pygame.image.load('e2.png')]
 comer = [pygame.image.load('c0.png'), pygame.image.load('c1.png'), pygame.image.load('c2.png'), pygame.image.load('c3.png'), pygame.image.load('c4.png')]
@@ -26,3 +41,11 @@ som_perdeu = pygame.mixer.Sound('Lose.mp3')
 musica = pygame.mixer.music.load('Background_soundtrack-Rude_Eternal_Youth.mp3')
 pygame.mixer.music.play(-1)
 
+
+
+onigiri_img = pygame.transform.scale(fruit_img, (comida_largura, comida_altura))
+lamen_img = pygame.transform.scale(fruit2_img, (comida_largura, comida_altura))
+doce_img = pygame.transform.scale(fruit_img, (comida_largura, comida_altura))
+sushi_img = pygame.transform.scale(fruit_img, (comida_largura, comida_altura))
+sumo_img = pygame.transform.scale(sumo_img, (sumo_largura, sumo_altura))
+bigorna_img = pygame.transform.scale(bigorna_img, (bigorna_largura, bigorna_altura))
