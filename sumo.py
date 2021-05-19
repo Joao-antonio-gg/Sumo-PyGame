@@ -9,7 +9,7 @@ pygame.init()
 
 #Definindo janela
 largura=1024
-altura=769
+altura=768
 janela = pygame.display.set_mode((largura,altura))
 
 #Nome do jogo
@@ -25,8 +25,8 @@ docepng = pygame.image.load('Assets/doce.png')
 
 comida_largura = 60
 comida_altura = 60
-sumo_largura = 300
-sumo_altura = 300
+sumo_largura = 200
+sumo_altura = 200
 bigorna_altura = 80
 bigorna_largura = 100
 
@@ -42,6 +42,7 @@ som_comer = pygame.mixer.Sound('Assets/comer.mp3')
 som_pontos = pygame.mixer.Sound('Assets/checkpoint.mp3')
 som_perdeu = pygame.mixer.Sound('Assets/lose.mp3')
 musica = pygame.mixer.music.load('Assets/musica.mp3')
+pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
 assets["fonte_pontos"] = pygame.font.Font('Assets/fonte_sumo.ttf', 28)
@@ -131,7 +132,7 @@ doce_sprite = pygame.sprite.Group()
 lamen_sprite = pygame.sprite.Group()
 bigorna_sprite = pygame.sprite.Group()
 sumo_sprite = sumo(sumopng)
-
+sprites.add(sumo_sprite)
 #cria sushi
 for i in range(1):
     sushidif = comidas(sushipng)
@@ -200,16 +201,16 @@ while game_on:
         if event.type == pygame.KEYDOWN:
             # Dependendo da tecla, altera a velocidade.
             if event.key == pygame.K_LEFT:
-                sumo_sprite.speedx -= 8
+                sumo_sprite.speedx -= 4
             if event.key == pygame.K_RIGHT:
-                sumo_sprite.speedx += 8
+                sumo_sprite.speedx += 4
             # Verifica se soltou alguma tecla.
         if event.type == pygame.KEYUP:
             # Dependendo da tecla, altera a velocidade.
             if event.key == pygame.K_LEFT:
-                sumo_sprite.speedx += 8
+                sumo_sprite.speedx += 4
             if event.key == pygame.K_RIGHT:
-                sumo_sprite.speedx -= 8
+                sumo_sprite.speedx -= 4
 
     sprites.update()
 
@@ -241,16 +242,16 @@ while game_on:
         onigiri_sprite.add(c2)
         score += 15
         
-    #gera uma nova lamen para cada hit    
-    for lamen in hits3:
+    #gera uma novo lamen para cada hit    
+    for lamen in hits4:
         som_comer.play()
         c3 = comidas(lamenpng)
         sprites.add(c3)
         lamen_sprite.add(c3)
         score += 5
     
-    #gera uma nova doce para cada hit    
-    for doce in hits4:
+    #gera um novo doce para cada hit    
+    for doce in hits5:
         som_comer.play()
         c4 = comidas(docepng)
         sprites.add(c4)
