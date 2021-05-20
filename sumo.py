@@ -170,7 +170,7 @@ end_it=False
 
 #cria tela de início
 while (end_it==False):
-    startscreen=pygame.image.load('Assets/bigorna.png')
+    startscreen=pygame.image.load('Assets/start.jpeg')
     janela.blit(startscreen, (0,0))
     myfont=pygame.font.SysFont("Britannic Bold", 40)
     nlabel=myfont.render("Press ENTER to Start", 1, (255, 255, 255))
