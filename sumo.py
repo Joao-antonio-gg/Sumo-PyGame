@@ -47,6 +47,8 @@ pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
 assets["fonte_pontos"] = pygame.font.Font('Assets/fonte_sumo.ttf', 28)
+assets["fonte_gameover"] = pygame.font.Font('Assets/gameoverfont.ttf', 28)
+
 
 onigiripng = pygame.transform.scale(onigiripng, (comida_largura, comida_altura))
 lamenpng = pygame.transform.scale(lamenpng, (comida_largura, comida_altura))
@@ -172,8 +174,9 @@ end_it=False
 while (end_it==False):
     startscreen=pygame.image.load('Assets/start.jpeg')
     janela.blit(startscreen, (0,0))
-    myfont=pygame.font.SysFont("Britannic Bold", 40)
-    nlabel=myfont.render("Press ENTER to Start", 1, (255, 255, 255))
+    fontestart=pygame.font.SysFont("Consolas", 45)
+    start_enter=fontestart.render("Press ENTER to start", 1, (255, 255, 255))
+
     for event in pygame.event.get():
         if event .type == pygame.QUIT:
             pygame.quit()
@@ -181,7 +184,7 @@ while (end_it==False):
         if event.type==pygame.KEYDOWN:
             if event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER:
                 end_it=True
-    janela.blit(nlabel,(200,200))
+    janela.blit(start_enter,(500,600))
     pygame.display.flip()
 #---------------------------------------------------------------------------------------------------------------
 game_on = True
@@ -276,12 +279,14 @@ listascore = []
 listascore.append(score)
 #cria tela de encerramento do jogo
 if game_on == False:
-    janela.fill((0, 0, 0))
-    myfont=pygame.font.SysFont("Britannic Bold", 50)
-    nlabel=myfont.render("Você fez {:01d} pontos".format(score), 1, (255, 255, 255))
-    nlabel2=myfont.render("Game Over", 1, (255, 0, 0))
-    janela.blit(nlabel,(400,300))
-    janela.blit(nlabel2,(450,250))
+    gameoverscreen=pygame.image.load('Assets/game_over.png')
+    janela.blit(gameoverscreen, (0,0))
+    fontepontosfeitos=pygame.font.SysFont("Britannic Bold", 80)
+    fontegameover=pygame.font.Font('Assets/gameoverfont.ttf', 100)
+    pontos_feitos=fontepontosfeitos.render("Você fez {:01d} pontos".format(score), 1, (255, 255, 255))
+    game_over=fontegameover.render("Game Over", 1, (255, 0, 0))
+    janela.blit(pontos_feitos,(110,450))
+    janela.blit(game_over,(90,300))
     pygame.display.flip()
     time.sleep(3)
 
