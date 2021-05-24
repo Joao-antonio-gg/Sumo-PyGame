@@ -33,13 +33,13 @@ docepng = pygame.image.load('Assets/doce.png')
 #---------------------------------------------------------------------------------------------------
 #Redimensionar comidas, bigorna e sumo
 onigiripng = pygame.transform.scale(onigiripng, (comida_largura, comida_altura))
-lamenpng = pygame.transform.scale(lamenpng, (comida_largura, comida_altura))
+lamenpng = pygame.transform.scale(lamenpng, (comida_largura, comida_altura)) 
 docepng = pygame.transform.scale(docepng, (comida_largura, comida_altura))
 sushipng = pygame.transform.scale(sushipng, (comida_largura, comida_altura))
 sumopng = pygame.transform.scale(sumopng, (sumo_largura, sumo_altura))
 bigornapng = pygame.transform.scale(bigornapng, (bigorna_largura, bigorna_altura))
 #---------------------------------------------------------------------------------------------------
-#Importar frames das animações
+#Importar frames das animações e background
 direita = [pygame.image.load('Assets/d0.png'), pygame.image.load('Assets/d1.png'), pygame.image.load('Assets/d2.png')]
 esquerda = [pygame.image.load('Assets/e0.png'), pygame.image.load('Assets/e1.png'), pygame.image.load('Assets/e2.png')]
 comer = [pygame.image.load('Assets/c0.png'), pygame.image.load('Assets/c1.png'), pygame.image.load('Assets/c2.png'), pygame.image.load('Assets/c3.png'), pygame.image.load('Assets/c4.png')]
@@ -77,6 +77,10 @@ class sumo(pygame.sprite.Sprite):
         self.rect.bottom = altura + 10
         self.speedx = 0
         self.mask = pygame.mask.from_surface(sumopng)
+    
+    def update_image(self, img_2):
+        img_2 = pygame.transform.scale(img_2,(sumo_largura,sumo_altura))
+        self.image = img_2
 
 #Atualizar posição do sumo
     def update(self):
@@ -137,7 +141,7 @@ class bigorna(pygame.sprite.Sprite):
 #---------------------------------------------------------------------------------------------------
 #Definir quadros por segundo
 clock = pygame.time.Clock()
-FPS = 144
+FPS = 27
 #---------------------------------------------------------------------------------------------------
 #Criar grupos de sprites
 sprites = pygame.sprite.Group()
@@ -192,6 +196,33 @@ while (inicio_de_jogo==False):
                 inicio_de_jogo=True
     pygame.display.flip()
 #---------------------------------------------------------------------------------------------------
+#FUNÇÃO ANIMAÇÕES
+qtde_passos = 0
+caminha_esquerda = False
+caminha_direita = False
+conta_frame = 1
+def redrawGameWindow():
+    global qtde_passos, conta_frame
+    mudancas_por_segundo = 3
+    janela.blit(background, (0, 0))
+    if qtde_passos >= 27 or qtde_passos//3 > 2:
+        qtde_passos = 0
+
+    if caminha_direita and  conta_frame % mudancas_por_segundo == 0:
+        sumo_sprite.update_image(direita[qtde_passos // 3])
+        qtde_passos += 1
+    
+    elif caminha_esquerda and conta_frame % mudancas_por_segundo == 0:
+        sumo_sprite.update_image(esquerda[qtde_passos // 3])
+        qtde_passos += 1
+    
+    else:
+        sumo_sprite.update_image(sumopng)
+        janela.blit(sumopng,(largura / 2, altura + 10))
+        
+    conta_frame += 1
+
+#---------------------------------------------------------------------------------------------------
 #Criar condição de jogo ativo
 game_on = True
 while game_on:
@@ -215,8 +246,16 @@ while game_on:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 sumo_sprite.speedx -= 2
-            if event.key == pygame.K_RIGHT:
+                caminha_direita = False
+                caminha_esquerda = True
+            elif event.key == pygame.K_RIGHT:
                 sumo_sprite.speedx += 2
+                caminha_direita = True
+                caminha_esquerda = False
+        else:
+            caminha_esquerda = False
+            caminha_direita = False
+            qtde_passos = 0
 
 #Verificar se o player soltou alguma tecla e alterar velocidade do sumo pra cada tecla.
         if event.type == pygame.KEYUP:
@@ -270,8 +309,8 @@ while game_on:
         score += 20
 #---------------------------------------------------------------------------------------------------    
 #Colocar wallpaper do jogo na tela
-    janela.fill((0,0,0))
-    janela.blit(background, (0,0))
+    # janela.fill((0,0,0))
+    # janela.blit(background, (0,0))
 #---------------------------------------------------------------------------------------------------
 #Colocar score do jogador na tela
     pontos_na_tela = fonte_pontos.render("{:01d}".format(score), True, (vermelho))
@@ -280,6 +319,9 @@ while game_on:
 #Mostrar sprites na tela
     sprites.draw(janela)
     pygame.display.flip()
+#---------------------------------------------------------------------------------------------------        
+    redrawGameWindow()
+
 #---------------------------------------------------------------------------------------------------
 #Gerar tela de game over ao perder
 if game_on == False:
