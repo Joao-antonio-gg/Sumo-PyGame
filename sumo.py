@@ -74,7 +74,7 @@ class sumo(pygame.sprite.Sprite):
         self.image = img
         self.rect = self.image.get_rect()
         self.rect.centerx = largura / 2
-        self.rect.bottom = altura - 5
+        self.rect.bottom = altura + 10
         self.speedx = 0
         self.mask = pygame.mask.from_surface(sumopng)
 
@@ -150,28 +150,24 @@ sumo_sprite = sumo(sumopng)
 sprites.add(sumo_sprite)
 #---------------------------------------------------------------------------------------------------
 #Gerar sushi
-for i in range(1):
-    sushidif = comidas(sushipng)
-    sprites.add(sushidif)
-    sushi_sprite.add(sushidif)
+sushidif = comidas(sushipng)
+sprites.add(sushidif)
+sushi_sprite.add(sushidif)
 #---------------------------------------------------------------------------------------------------
 #Gerar onigiri
-for i in range(1):
-    onigiridif = comidas(onigiripng)
-    sprites.add(onigiridif)
-    onigiri_sprite.add(onigiridif)
+onigiridif = comidas(onigiripng)
+sprites.add(onigiridif)
+onigiri_sprite.add(onigiridif)
 #---------------------------------------------------------------------------------------------------
 #Gerar lamen
-for i in range(1):
-    lamendif = comidas(lamenpng)
-    sprites.add(lamendif)
-    lamen_sprite.add(lamendif)
+lamendif = comidas(lamenpng)
+sprites.add(lamendif)
+lamen_sprite.add(lamendif)
 #---------------------------------------------------------------------------------------------------    
 #Gerar doce
-for i in range(1):
-    docedif = comidas(docepng)
-    sprites.add(docedif)
-    doce_sprite.add(docedif)
+docedif = comidas(docepng)
+sprites.add(docedif)
+doce_sprite.add(docedif)
 #---------------------------------------------------------------------------------------------------
 #Score inicial
 score = 0
