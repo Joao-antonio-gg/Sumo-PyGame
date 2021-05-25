@@ -203,22 +203,24 @@ caminha_direita = False
 conta_frame = 1
 def redrawGameWindow():
     global qtde_passos, conta_frame
-    mudancas_por_segundo = 3
+    mudancas_por_segundo = 40  #se aumenta este numero, diminui a velocidade dos passos 
     janela.blit(background, (0, 0))
-    if qtde_passos >= 27 or qtde_passos//3 > 2:
+    if qtde_passos >= 27 or qtde_passos > 2:
         qtde_passos = 0
 
-    if caminha_direita and  conta_frame % mudancas_por_segundo == 0:
-        sumo_sprite.update_image(direita[qtde_passos // 3])
-        qtde_passos += 1
+    if caminha_direita: 
+        sumo_sprite.update_image(direita[qtde_passos])
+        if conta_frame % mudancas_por_segundo == 0:
+            qtde_passos += 1
     
-    elif caminha_esquerda and conta_frame % mudancas_por_segundo == 0:
-        sumo_sprite.update_image(esquerda[qtde_passos // 3])
-        qtde_passos += 1
+    elif caminha_esquerda: 
+        sumo_sprite.update_image(esquerda[qtde_passos])
+        if conta_frame % mudancas_por_segundo == 0:
+            qtde_passos += 1
     
     else:
         sumo_sprite.update_image(sumopng)
-        janela.blit(sumopng,(largura / 2, altura + 10))
+        #janela.blit(sumopng,(largura / 2, altura + 10)) apagar depois de explicar
         
     conta_frame += 1
 
@@ -252,16 +254,14 @@ while game_on:
                 sumo_sprite.speedx += 2
                 caminha_direita = True
                 caminha_esquerda = False
-        else:
-            caminha_esquerda = False
-            caminha_direita = False
-            qtde_passos = 0
 
 #Verificar se o player soltou alguma tecla e alterar velocidade do sumo pra cada tecla.
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
+                caminha_esquerda = False
                 sumo_sprite.speedx += 2
             if event.key == pygame.K_RIGHT:
+                caminha_direita = False
                 sumo_sprite.speedx -= 2
     sprites.update()
 #---------------------------------------------------------------------------------------------------
