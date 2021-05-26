@@ -261,7 +261,7 @@ def SumoComendo():
 game_on = True
 contador0 = 0
 while game_on:
-    if contador0 > 40:
+    if contador0 > 80:
         contador0 = 0
         comer_ativo = False
     if contador0 > 0:
