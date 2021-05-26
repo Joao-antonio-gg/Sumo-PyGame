@@ -196,38 +196,57 @@ while (inicio_de_jogo==False):
                 inicio_de_jogo=True
     pygame.display.flip()
 #---------------------------------------------------------------------------------------------------
-#FUNÇÃO ANIMAÇÕES
+#FUNÇÃO ANIMAÇÕES - CAMINHAR
 qtde_passos = 0
 caminha_esquerda = False
 caminha_direita = False
 conta_frame = 1
 def redrawGameWindow():
     global qtde_passos, conta_frame
-    mudancas_por_segundo = 40  #se aumenta este numero, diminui a velocidade dos passos 
+    #Se esse número aumenta, diminui a velocidade dos passos
+    mudancas_por_segundo = 40  
     janela.blit(background, (0, 0))
     if qtde_passos >= 27 or qtde_passos > 2:
         qtde_passos = 0
-
     if caminha_direita: 
         sumo_sprite.update_image(direita[qtde_passos])
         if conta_frame % mudancas_por_segundo == 0:
             qtde_passos += 1
-    
-    elif caminha_esquerda: 
+    elif caminha_esquerda:
         sumo_sprite.update_image(esquerda[qtde_passos])
         if conta_frame % mudancas_por_segundo == 0:
             qtde_passos += 1
-    
-    else:
+    elif not caminha_esquerda and not caminha_direita and not comer_ativo:
         sumo_sprite.update_image(sumopng)
-        #janela.blit(sumopng,(largura / 2, altura + 10)) apagar depois de explicar
-        
     conta_frame += 1
-
+#--------------------------------------------------------------------------
+#FUNCÃO ANIMAÇÕES - COMER
+comer_ativo = False
+quanto_comeu = 0
+conta_frame2 = 1
+def SumoComendo():
+    global quanto_comeu, conta_frame2, comer_ativo
+    mudancas_por_segundo2 = 40
+    janela.blit(background, (0, 0))
+    if quanto_comeu >= 27 or quanto_comeu > 2:
+        quanto_comeu = 0
+    if comer_ativo:
+        sumo_sprite.update_image(comer[quanto_comeu])
+        if conta_frame2 % mudancas_por_segundo2 == 0:
+            quanto_comeu += 1
+    # else:
+    #     sumo_sprite.update_image(sumopng)
+    conta_frame2 += 1
 #---------------------------------------------------------------------------------------------------
 #Criar condição de jogo ativo
 game_on = True
+contador0 = 0
 while game_on:
+    if contador0 > 40:
+        contador0 = 0
+        comer_ativo = False
+    if contador0 > 0:
+        contador0 += 1
 #---------------------------------------------------------------------------------------------------
 #Aumentar o número de bigornas a cada 100 pontos feitos
     if len(bigorna_sprite.sprites()) < (score//100 + 1):
@@ -274,39 +293,51 @@ while game_on:
 #---------------------------------------------------------------------------------------------------
 #Gerar outro sushi para cada sushi comido pelo sumo
     hit_sushi = pygame.sprite.spritecollide(sumo_sprite, sushi_sprite, True, pygame.sprite.collide_mask)
-    for sushi in hit_sushi:
+    if hit_sushi:
+        print('ayo')
+        comer_ativo = True
         som_comer.play()
         c1 = comidas(sushipng)
         score += 10               
         sprites.add(c1)     
         sushi_sprite.add(c1)
+        contador0 += 1
 #---------------------------------------------------------------------------------------------------
 #Gerar outro onigiri para cada onigiri comido pelo sumo
     hit_onigiri = pygame.sprite.spritecollide(sumo_sprite, onigiri_sprite, True, pygame.sprite.collide_mask) 
-    for onigiri in hit_onigiri:
+    if hit_onigiri:
+        print('ayo')
+        comer_ativo = True
         som_comer.play()
         c2 = comidas(onigiripng)
         sprites.add(c2)
         onigiri_sprite.add(c2)
         score += 15
+        contador0 += 1
 #---------------------------------------------------------------------------------------------------       
 #Gerar outro lamen para cada lamen comido pelo sumo  
     hit_lamen = pygame.sprite.spritecollide(sumo_sprite, lamen_sprite, True, pygame.sprite.collide_mask)
-    for lamen in hit_lamen:
+    if hit_lamen:
+        print('ayo')
+        comer_ativo = True
         som_comer.play()
         c3 = comidas(lamenpng)
         sprites.add(c3)
         lamen_sprite.add(c3)
         score += 5
+        contador0 += 1
 #---------------------------------------------------------------------------------------------------    
 #Gerar outro doce para cada doce comido pelo sumo
     hit_doce = pygame.sprite.spritecollide(sumo_sprite, doce_sprite, True, pygame.sprite.collide_mask)    
-    for doce in hit_doce:
+    if hit_doce:
+        print('ayo')
+        comer_ativo = True
         som_comer.play()
         c4 = comidas(docepng)
         sprites.add(c4)
         doce_sprite.add(c4)
         score += 20
+        contador0 += 1
 #---------------------------------------------------------------------------------------------------    
 #Colocar wallpaper do jogo na tela
     # janela.fill((0,0,0))
@@ -321,7 +352,9 @@ while game_on:
     pygame.display.flip()
 #---------------------------------------------------------------------------------------------------        
     redrawGameWindow()
-
+    if comer_ativo:
+        print('comer ativo é true')
+    SumoComendo()
 #---------------------------------------------------------------------------------------------------
 #Gerar tela de game over ao perder
 if game_on == False:
