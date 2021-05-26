@@ -66,6 +66,7 @@ fonte_pontos=pygame.font.Font('Assets/arcade.ttf', 100)
 fonte_game_over=pygame.font.Font('Assets/gameoverfont.ttf', 170)
 fonte_start=pygame.font.SysFont("Consolas", 45)
 fonte_pontos_feitos=pygame.font.Font('Assets/gameoverfont.ttf', 90)
+fonte_high_score=pygame.font.Font('Assets/arcade.ttf', 30)
 #---------------------------------------------------------------------------------------------------
 #Definir classe do sumo
 class sumo(pygame.sprite.Sprite):
@@ -181,11 +182,31 @@ pygame.mixer.music.play(-1)
 #---------------------------------------------------------------------------------------------------
 #Gerar tela inicial do jogo
 inicio_de_jogo=False
+def extractMaximum(ss): 
+    num, res = 0, 0 
+    for i in range(len(ss)): 
+        if ss[i] >= "0" and ss[i] <= "9": 
+            num = num * 10 + int(int(ss[i]) - 0) 
+        else: 
+            res = max(res, num) 
+            num = 0 
+    return max(res, num) 
+
+with open('Score.txt', 'r') as arquivo:
+    conteudo = arquivo.read()
+    lista_linhas = conteudo.split('\n')
+    
+    for linha in lista_linhas:
+        valor_max = extractMaximum(linha)
+
+
 while (inicio_de_jogo==False):
     inicio_screen=pygame.image.load('Assets/start.jpeg')
     janela.blit(inicio_screen, (0,0))
     start_enter=fonte_start.render("Press ENTER to start", True, (branco))
     janela.blit(start_enter,(500,600))
+    high_score=fonte_high_score.render("HIGH SCORE: {0}".format(valor_max), True, (branco))
+    janela.blit(high_score,(20,400))
 
     for event in pygame.event.get():
         if event .type == pygame.QUIT:
@@ -358,5 +379,10 @@ if game_on == False:
     janela.blit(game_over,(70,50))
     pygame.display.flip()
     time.sleep(3)
+
+#Guardando o score
+with open('Score.txt', 'a') as scores:
+    scores.write('{0} '.format(score))
+    
 
 pygame.quit()
