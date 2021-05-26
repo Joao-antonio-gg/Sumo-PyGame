@@ -234,8 +234,6 @@ def SumoComendo():
         sumo_sprite.update_image(comer[quanto_comeu])
         if conta_frame2 % mudancas_por_segundo2 == 0:
             quanto_comeu += 1
-    # else:
-    #     sumo_sprite.update_image(sumopng)
     conta_frame2 += 1
 #---------------------------------------------------------------------------------------------------
 #Criar condição de jogo ativo
@@ -294,7 +292,6 @@ while game_on:
 #Gerar outro sushi para cada sushi comido pelo sumo
     hit_sushi = pygame.sprite.spritecollide(sumo_sprite, sushi_sprite, True, pygame.sprite.collide_mask)
     if hit_sushi:
-        print('ayo')
         comer_ativo = True
         som_comer.play()
         c1 = comidas(sushipng)
@@ -306,7 +303,6 @@ while game_on:
 #Gerar outro onigiri para cada onigiri comido pelo sumo
     hit_onigiri = pygame.sprite.spritecollide(sumo_sprite, onigiri_sprite, True, pygame.sprite.collide_mask) 
     if hit_onigiri:
-        print('ayo')
         comer_ativo = True
         som_comer.play()
         c2 = comidas(onigiripng)
@@ -318,7 +314,6 @@ while game_on:
 #Gerar outro lamen para cada lamen comido pelo sumo  
     hit_lamen = pygame.sprite.spritecollide(sumo_sprite, lamen_sprite, True, pygame.sprite.collide_mask)
     if hit_lamen:
-        print('ayo')
         comer_ativo = True
         som_comer.play()
         c3 = comidas(lamenpng)
@@ -330,7 +325,6 @@ while game_on:
 #Gerar outro doce para cada doce comido pelo sumo
     hit_doce = pygame.sprite.spritecollide(sumo_sprite, doce_sprite, True, pygame.sprite.collide_mask)    
     if hit_doce:
-        print('ayo')
         comer_ativo = True
         som_comer.play()
         c4 = comidas(docepng)
@@ -352,8 +346,6 @@ while game_on:
     pygame.display.flip()
 #---------------------------------------------------------------------------------------------------        
     redrawGameWindow()
-    if comer_ativo:
-        print('comer ativo é true')
     SumoComendo()
 #---------------------------------------------------------------------------------------------------
 #Gerar tela de game over ao perder
