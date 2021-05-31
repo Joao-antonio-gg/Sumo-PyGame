@@ -1,12 +1,14 @@
 # Sumo Eats
 
-Projeto final de Design de Software, desenvolvido pelos alunos: Arthur Motta, Enzo Del Manto, João Antônio Garcia. 
+Projeto final de Design de Software, desenvolvido pelos alunos: Arthur Motta, Enzo Del Manto, João Antônio Garcia.
 
 Turma 1C - Engenharia
 
 # Como Jogar?
 
-Ao executar o jogo aperte a tecla ENTER para iniciar.
+Execute o arquivo sumo.py para jogar
+
+Ao executar o arquivo aperte a tecla ENTER para iniciar o jogo.
 
 Você é um lutador de sumo que precisa comer o máximo possível para sua próxima luta.
 
