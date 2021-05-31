@@ -14,7 +14,11 @@ Use as setinhas do teclado para mover o personagem para os lados.
 
 Desvie das bigornas caindo do céu e coma o quanto conseguir!
 
-Cada comida dá ao jogador uma certa pontuação: Lamen - 5 pontos ; Sushi - 10 pontos ; Onigiri - 15 pontos ; Doce - 20 pontos ;
+Cada comida dá ao jogador uma certa pontuação:
+**Lamen - 5 pontos** 
+**Sushi - 10 pontos** 
+**Onigiri - 15 pontos** 
+**Doce - 20 pontos** 
 
 Se você for atingido pela bigorna você é derrotado.
 
