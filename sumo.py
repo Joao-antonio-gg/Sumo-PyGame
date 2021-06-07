@@ -142,7 +142,7 @@ class bigorna(pygame.sprite.Sprite):
 #---------------------------------------------------------------------------------------------------
 #Definir quadros por segundo
 clock = pygame.time.Clock()
-FPS = 27
+FPS = 60
 #---------------------------------------------------------------------------------------------------
 #Criar grupos de sprites
 sprites = pygame.sprite.Group()
@@ -381,7 +381,11 @@ if game_on == False:
     time.sleep(3)
 
 #Guardando o score
-with open('Score.txt', 'a') as scores:
+with open('Score.txt', 'r') as scores:
+    high_score_total = int(scores.read())
+if high_score_total < score:
+    with open('Score.txt', 'w') as arquivo_score:
+        arquivo_score.write('{0}'.format(score))
     scores.write('{0} '.format(score))
     
 
