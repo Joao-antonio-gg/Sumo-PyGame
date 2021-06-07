@@ -386,7 +386,6 @@ with open('Score.txt', 'r') as scores:
 if high_score_total < score:
     with open('Score.txt', 'w') as arquivo_score:
         arquivo_score.write('{0}'.format(score))
-    scores.write('{0} '.format(score))
     
 
 pygame.quit()
