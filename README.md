@@ -2,6 +2,8 @@
 
 Projeto final de Design de Software, desenvolvido pelos alunos: Arthur Motta, Enzo Del Manto, João Antônio Garcia.
 
+Demonstação do Jogo através de um vídeo: https://www.youtube.com/watch?v=ZWTlcRSdLu8&ab_channel=EDM
+
 Turma 1C - Engenharia
 
 # Como Jogar?
