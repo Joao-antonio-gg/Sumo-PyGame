@@ -3,7 +3,7 @@ from classes_FUNCOES import *
 from fontes_cores import *
 from funcoes_animacoes import *
 def in_game():
-    while game_on:
+    while True:
         if contador0 > 80:
             contador0 = 0
             comer_ativo = False
