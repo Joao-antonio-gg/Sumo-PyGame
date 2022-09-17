@@ -1,4 +1,7 @@
-import assets
+from assets import *
+from classes_FUNCOES import *
+from fontes_cores import *
+from funcoes_animacoes import *
 def in_game():
     while game_on:
         if contador0 > 80:

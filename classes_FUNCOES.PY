@@ -1,4 +1,5 @@
 #Definir classe do sumo
+from assets import *
 class sumo(pygame.sprite.Sprite):
     def __init__(self, img):
         pygame.sprite.Sprite.__init__(self)
