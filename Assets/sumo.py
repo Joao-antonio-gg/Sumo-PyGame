@@ -101,7 +101,7 @@ class bigorna(pygame.sprite.Sprite):
         self.speedy = random.randint(2, 5)
         self.mask = pygame.mask.from_surface(bigornapng)
     def update(self):
-        # Atualizando a posição da bomba  
+        # Atualizando a posição da bomba
         self.rect.y += self.speedy
         # Se a bomba passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
@@ -115,7 +115,7 @@ FPS = 144
 
 jogo_on = True
 
-#criando grupo 
+#criando grupo
 sprites = pygame.sprite.Group()
 onigiri_sprite = pygame.sprite.Group()
 sushi_sprite = pygame.sprite.Group()
@@ -206,22 +206,22 @@ while game_on:
 
     # Verifica se houve contato entre o player e a bomba
     hits = pygame.sprite.spritecollide(sumo, bigorna, True, pygame.sprite.collide_mask)
-    for bigorna_sprite in hits:     
+    for bigorna_sprite in hits:
         som_perdeu.play()
         time.sleep(1)
         game_on = False
 
     hits2 = pygame.sprite.spritecollide(sumo, sushi_sprite, True, pygame.sprite.collide_mask)
-    hits3 = pygame.sprite.spritecollide(sumo, onigiri_sprite, True, pygame.sprite.collide_mask) 
+    hits3 = pygame.sprite.spritecollide(sumo, onigiri_sprite, True, pygame.sprite.collide_mask)
     hits4 = pygame.sprite.spritecollide(sumo, lamen_sprite, True, pygame.sprite.collide_mask)
-    hits5 = pygame.sprite.spritecollide(sumo, doce_sprite, True, pygame.sprite.collide_mask) 
+    hits5 = pygame.sprite.spritecollide(sumo, doce_sprite, True, pygame.sprite.collide_mask)
 
     #gera um novo sushi para cada hit
     for sushi in hits2:
         som_comer.play()
         c1 = comidas(sushipng)
-        score += 10               
-        sprites.add(c1)     
+        score += 10
+        sprites.add(c1)
         sushi_sprite.add(c1)
 
     #gera um novo onigiri para cada hit
@@ -232,7 +232,7 @@ while game_on:
         onigiri_sprite.add(c2)
         score += 15
         
-    #gera uma nova lamen para cada hit    
+    #gera uma nova lamen para cada hit
     for lamen in hits3:
         som_comer.play()
         c3 = comidas(lamenpng)
@@ -240,7 +240,7 @@ while game_on:
         lamen_sprite.add(c3)
         score += 5
     
-    #gera uma nova doce para cada hit    
+    #gera uma nova doce para cada hit
     for doce in hits4:
         som_comer.play()
         c4 = comidas(docepng)
