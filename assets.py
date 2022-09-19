@@ -3,7 +3,6 @@ import random
 import sys
 import time
 
-
 pygame.init()
 
 
@@ -38,8 +37,10 @@ class sumo(pygame.sprite.Sprite):
             self.rect.left = 0
             if key_pess == 0:
                 sumo_sprite.update_image(esquerda[2])
+
     def get_position(self):
         return self.rect.x, self.rect.y
+
 
 class comidas(pygame.sprite.Sprite):
     def __init__(self, img):
@@ -144,7 +145,7 @@ background = pygame.image.load('Assets/wallpaper 2.png')
 som_comer = pygame.mixer.Sound('Assets/comer.mp3')
 som_pontos = pygame.mixer.Sound('Assets/checkpoint.mp3')
 som_perdeu = pygame.mixer.Sound('Assets/lose.mp3')
-musica = pygame.mixer.music.load('Assets/musica.mp3')
+musica = pygame.mixer.Sound('Assets/musica.mp3')
 # ---------------------------------------------------------------------------------------------------
 # Criar grupos de sprites
 sprites = pygame.sprite.Group()
